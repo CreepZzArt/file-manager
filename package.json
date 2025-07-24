@@ -1,0 +1,76 @@
+{
+  "name": "docmanager",
+  "version": "1.0.0",
+  "main": "electron/main.js",
+  "type": "module",
+  "scripts": {
+    "dev": "vite-plugin-electron serve",
+    "dev:vite": "vite",
+    "dev:electron": "electron .",
+    "build:renderer": "vite build",
+    "build": "npm run build:renderer",
+    "dist": "npm run build && electron-builder --win",
+    "app:dir": "electron-builder --dir"
+  },
+  "build": {
+    "appId": "com.yourcompany.yourapp",
+    "productName": "Your App Name",
+    "copyright": "Copyright © 2023 Your Company",
+    "directories": {
+      "output": "dist_electron"
+    },
+    "files": [
+      "dist/**/*",
+      "electron/**/*",
+      "!**/node_modules/*/{CHANGELOG.md,README.md,README,readme.md,readme}",
+      "package.json"
+    ],
+    "win": {
+      "target": "nsis",
+      "icon": "build/icon.ico",
+      "publisherName": "Your Company",
+      "fileAssociations": [
+        {
+          "ext": "yourapp",
+          "name": "YourApp Document",
+          "description": "YourApp Project File"
+        }
+      ],
+      "rfc3161TimeStampServer": "http://timestamp.digicert.com"
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": true,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "Your App",
+      "menuCategory": "Your Apps",
+      "uninstallDisplayName": "Your App",
+      "deleteAppDataOnUninstall": true
+    },
+    "asar": true,
+    "artifactName": "${productName}-Setup-${version}.${ext}"
+  },
+  "dependencies": {
+    "dompurify": "^3.2.6",
+    "element-plus": "^2.10.3",
+    "fs-extra": "^11.3.0",
+    "marked": "^16.1.1",
+    "path-browserify": "^1.0.1",
+    "pdfjs-dist": "^5.3.93",
+    "pinia": "^3.0.3",
+    "vue": "^3.5.17",
+    "vue-pdf-embed": "^2.1.3",
+    "vue-router": "^4.5.1"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^6.0.0",
+    "concurrently": "^9.2.0",
+    "cross-env": "^7.0.3",
+    "electron": "^28.0.0",
+    "electron-builder": "^24.13.3",
+    "vite": "^7.0.4",
+    "vite-plugin-electron": "^0.29.0"
+  }
+}
